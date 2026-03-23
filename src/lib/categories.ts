@@ -8,7 +8,12 @@ export interface CategoryMeta {
   icon: string;
   type: ChallengeType;
   commands: string[];
-  area: "neovim-core" | "neovim-plugins" | "ghostty" | "claude-code" | "workflow";
+  area:
+    | "neovim-core"
+    | "neovim-plugins"
+    | "ghostty"
+    | "claude-code"
+    | "workflow";
 }
 
 export const categories: CategoryMeta[] = [
@@ -20,7 +25,26 @@ export const categories: CategoryMeta[] = [
     description: "f/t/F/T, {}, %, gd, 0/^/$, w/b/e, gg/G",
     icon: ">>",
     type: "editor",
-    commands: ["f", "t", "F", "T", ";", ",", "{", "}", "%", "gd", "w", "b", "e", "gg", "G", "0", "^", "$"],
+    commands: [
+      "f",
+      "t",
+      "F",
+      "T",
+      ";",
+      ",",
+      "{",
+      "}",
+      "%",
+      "gd",
+      "w",
+      "b",
+      "e",
+      "gg",
+      "G",
+      "0",
+      "^",
+      "$",
+    ],
     area: "neovim-core",
   },
   {
@@ -30,7 +54,21 @@ export const categories: CategoryMeta[] = [
     description: "dd, cc, yy, p, P, J, ~, ., u, Ctrl-r",
     icon: "~=",
     type: "editor",
-    commands: ["dd", "cc", "yy", "p", "P", "J", "~", ".", "u", "Ctrl-r", "x", "r", "s"],
+    commands: [
+      "dd",
+      "cc",
+      "yy",
+      "p",
+      "P",
+      "J",
+      "~",
+      ".",
+      "u",
+      "Ctrl-r",
+      "x",
+      "r",
+      "s",
+    ],
     area: "neovim-core",
   },
   {
@@ -40,7 +78,22 @@ export const categories: CategoryMeta[] = [
     description: 'ci", da(, vi{, yap, diw, cas',
     icon: '""',
     type: "editor",
-    commands: ["ci\"", "ca\"", "di\"", "da(", "ci(", "vi{", "va{", "yap", "dap", "yiw", "diw", "ciw", "cas", "dis"],
+    commands: [
+      'ci"',
+      'ca"',
+      'di"',
+      "da(",
+      "ci(",
+      "vi{",
+      "va{",
+      "yap",
+      "dap",
+      "yiw",
+      "diw",
+      "ciw",
+      "cas",
+      "dis",
+    ],
     area: "neovim-core",
   },
   {
@@ -50,7 +103,7 @@ export const categories: CategoryMeta[] = [
     description: '"ayy, "ap, "+y, "0p, :reg',
     icon: '"a',
     type: "editor",
-    commands: ["\"ayy", "\"ap", "\"+y", "\"+p", "\"0p", ":reg"],
+    commands: ['"ayy', '"ap', '"+y', '"+p', '"0p', ":reg"],
     area: "neovim-core",
   },
   {
@@ -70,7 +123,18 @@ export const categories: CategoryMeta[] = [
     description: "/, ?, n, N, *, #, cgn, :%s, :g",
     icon: ":%",
     type: "editor",
-    commands: ["/", "?", "n", "N", "*", "#", "cgn", ":%s///g", ":g//d", ":g//norm"],
+    commands: [
+      "/",
+      "?",
+      "n",
+      "N",
+      "*",
+      "#",
+      "cgn",
+      ":%s///g",
+      ":g//d",
+      ":g//norm",
+    ],
     area: "neovim-core",
   },
   {
@@ -100,7 +164,18 @@ export const categories: CategoryMeta[] = [
     description: "Ctrl-w s/v/h/j/k/l, :bn, :bp, :bd",
     icon: "^W",
     type: "command-input",
-    commands: ["Ctrl-w s", "Ctrl-w v", "Ctrl-w h", "Ctrl-w j", "Ctrl-w k", "Ctrl-w l", ":bn", ":bp", ":bd", ":ls"],
+    commands: [
+      "Ctrl-w s",
+      "Ctrl-w v",
+      "Ctrl-w h",
+      "Ctrl-w j",
+      "Ctrl-w k",
+      "Ctrl-w l",
+      ":bn",
+      ":bp",
+      ":bd",
+      ":ls",
+    ],
     area: "neovim-core",
   },
   {
@@ -121,7 +196,13 @@ export const categories: CategoryMeta[] = [
     description: "<leader>ff, <leader>fg, <leader>fb, <leader>fh",
     icon: "ff",
     type: "command-input",
-    commands: ["<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fs"],
+    commands: [
+      "<leader>ff",
+      "<leader>fg",
+      "<leader>fb",
+      "<leader>fh",
+      "<leader>fs",
+    ],
     area: "neovim-plugins",
   },
   {
@@ -141,7 +222,17 @@ export const categories: CategoryMeta[] = [
     description: "gd, gr, K, <leader>ca, <leader>rn, [d, ]d",
     icon: "gd",
     type: "command-input",
-    commands: ["gd", "gr", "K", "<leader>ca", "<leader>rn", "[d", "]d", "gi", "gD"],
+    commands: [
+      "gd",
+      "gr",
+      "K",
+      "<leader>ca",
+      "<leader>rn",
+      "[d",
+      "]d",
+      "gi",
+      "gD",
+    ],
     area: "neovim-plugins",
   },
   {
@@ -151,7 +242,17 @@ export const categories: CategoryMeta[] = [
     description: "harpoon, oil.nvim, gitsigns, which-key, nvim-cmp",
     icon: "{}",
     type: "command-input",
-    commands: ["<leader>a", "<leader>1", "<leader>2", "-", "]c", "[c", "<leader>hs", "<C-n>", "<C-p>"],
+    commands: [
+      "<leader>a",
+      "<leader>1",
+      "<leader>2",
+      "-",
+      "]c",
+      "[c",
+      "<leader>hs",
+      "<C-n>",
+      "<C-p>",
+    ],
     area: "neovim-plugins",
   },
   // Ghostty
@@ -173,7 +274,15 @@ export const categories: CategoryMeta[] = [
     description: "/help, /commit, plan mode, worktree, MCP連携",
     icon: "CC",
     type: "command-input",
-    commands: ["/help", "/clear", "/compact", "/commit", "/review-pr", "Escape", "Tab"],
+    commands: [
+      "/help",
+      "/clear",
+      "/compact",
+      "/commit",
+      "/review-pr",
+      "Escape",
+      "Tab",
+    ],
     area: "claude-code",
   },
   // Workflow
@@ -190,8 +299,16 @@ export const categories: CategoryMeta[] = [
 ];
 
 export const areas = [
-  { id: "neovim-core" as const, name: "Neovim Core", nameJa: "Neovim 実践テクニック" },
-  { id: "neovim-plugins" as const, name: "Neovim Plugins", nameJa: "Neovim プラグイン" },
+  {
+    id: "neovim-core" as const,
+    name: "Neovim Core",
+    nameJa: "Neovim 実践テクニック",
+  },
+  {
+    id: "neovim-plugins" as const,
+    name: "Neovim Plugins",
+    nameJa: "Neovim プラグイン",
+  },
   { id: "ghostty" as const, name: "Ghostty", nameJa: "Ghostty ターミナル" },
   { id: "claude-code" as const, name: "Claude Code", nameJa: "Claude Code" },
   { id: "workflow" as const, name: "Workflow", nameJa: "統合ワークフロー" },

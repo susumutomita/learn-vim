@@ -28,6 +28,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# package manager lock (using bun)
+package-lock.json
+
 # env files
 .env*.local
 

@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import type { UserProgress } from "@/types/progress";
+import Link from "next/link";
 
 interface HeaderProps {
   progress?: UserProgress;

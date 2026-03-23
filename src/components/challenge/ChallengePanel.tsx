@@ -54,21 +54,22 @@ export default function ChallengePanel({
         {challenge.description}
       </p>
 
-      {challenge.suggestedCommands && challenge.suggestedCommands.length > 0 && (
-        <div className="space-y-1">
-          <p className="text-xs text-[#484f58]">関連コマンド:</p>
-          <div className="flex gap-1 flex-wrap">
-            {challenge.suggestedCommands.map((cmd) => (
-              <kbd
-                key={cmd}
-                className="text-xs px-1.5 py-0.5 bg-[#1c2128] border border-[#30363d] rounded text-[#bc8cff] font-mono"
-              >
-                {cmd}
-              </kbd>
-            ))}
+      {challenge.suggestedCommands &&
+        challenge.suggestedCommands.length > 0 && (
+          <div className="space-y-1">
+            <p className="text-xs text-[#484f58]">関連コマンド:</p>
+            <div className="flex gap-1 flex-wrap">
+              {challenge.suggestedCommands.map((cmd) => (
+                <kbd
+                  key={cmd}
+                  className="text-xs px-1.5 py-0.5 bg-[#1c2128] border border-[#30363d] rounded text-[#bc8cff] font-mono"
+                >
+                  {cmd}
+                </kbd>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 }

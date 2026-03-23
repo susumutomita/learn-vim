@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
 import { askClaudeJSON } from "@/lib/claude";
 import { buildChallengePrompt } from "@/lib/prompts";
-import type { Category, Difficulty, Challenge } from "@/types/challenge";
+import type { Category, Challenge, Difficulty } from "@/types/challenge";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
@@ -57,14 +57,13 @@ export async function POST(request: NextRequest) {
     if (!challenge) {
       return NextResponse.json(
         { error: "Failed to generate challenge after retries" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     return NextResponse.json({ challenge });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Unknown error";
+    const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

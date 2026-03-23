@@ -1,17 +1,17 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useRef, useState, useEffect, useCallback, Suspense } from "react";
-import dynamic from "next/dynamic";
-import type { VimEditorHandle } from "@/components/editor/VimEditor";
-import ChallengePanel from "@/components/challenge/ChallengePanel";
 import ChallengeControls from "@/components/challenge/ChallengeControls";
+import ChallengePanel from "@/components/challenge/ChallengePanel";
 import ExpectedResult from "@/components/challenge/ExpectedResult";
 import FeedbackPanel from "@/components/challenge/FeedbackPanel";
+import type { VimEditorHandle } from "@/components/editor/VimEditor";
 import Header from "@/components/layout/Header";
 import { useChallenge } from "@/hooks/useChallenge";
 import { useProgress } from "@/hooks/useProgress";
 import type { Category } from "@/types/challenge";
+import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 
 const VimEditor = dynamic(() => import("@/components/editor/VimEditor"), {
   ssr: false,
@@ -44,8 +44,13 @@ function ChallengeContent() {
     showHint,
   } = useChallenge();
 
-  const { progress, markCompleted, markAttempted, getCompletedCount, getCurrentDifficulty } =
-    useProgress();
+  const {
+    progress,
+    markCompleted,
+    markAttempted,
+    getCompletedCount,
+    getCurrentDifficulty,
+  } = useProgress();
 
   const hasFetchedRef = useRef(false);
 
@@ -162,7 +167,6 @@ function ChallengeContent() {
                     }}
                     placeholder="コマンドを入力..."
                     className="flex-1 bg-transparent text-[#e6edf3] font-mono text-sm outline-none placeholder-[#484f58]"
-                    autoFocus
                   />
                 </div>
               </div>

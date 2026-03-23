@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useProgress } from "@/hooks/useProgress";
-import { categories, areas } from "@/lib/categories";
 import CategoryCard from "@/components/home/CategoryCard";
 import Header from "@/components/layout/Header";
+import { useProgress } from "@/hooks/useProgress";
+import { areas, categories } from "@/lib/categories";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const router = useRouter();
