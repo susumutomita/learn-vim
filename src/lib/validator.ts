@@ -5,7 +5,7 @@ export interface ValidationResult {
 
 export function validateAnswer(
   userContent: string,
-  expectedContent: string
+  expectedContent: string,
 ): ValidationResult {
   const normalizedUser = normalize(userContent);
   const normalizedExpected = normalize(expectedContent);
@@ -20,11 +20,11 @@ export function validateAnswer(
 
 export function validateCommandInput(
   userInput: string,
-  acceptedAnswers: string[]
+  acceptedAnswers: string[],
 ): ValidationResult {
   const normalizedInput = userInput.trim().toLowerCase();
   const isCorrect = acceptedAnswers.some(
-    (answer) => normalizedInput === answer.trim().toLowerCase()
+    (answer) => normalizedInput === answer.trim().toLowerCase(),
   );
   return { isCorrect };
 }

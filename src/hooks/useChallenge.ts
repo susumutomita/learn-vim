@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import type { Challenge, Category, Difficulty } from "@/types/challenge";
 import { validateAnswer, validateCommandInput } from "@/lib/validator";
+import type { Category, Challenge, Difficulty } from "@/types/challenge";
+import { useCallback, useState } from "react";
 
 interface FeedbackState {
   isCorrect: boolean | null;
@@ -24,13 +24,18 @@ export function useChallenge() {
   const [challenge, setChallenge] = useState<Challenge | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [feedbackState, setFeedbackState] = useState<FeedbackState>(emptyFeedback);
+  const [feedbackState, setFeedbackState] =
+    useState<FeedbackState>(emptyFeedback);
   const [isFeedbackLoading, setIsFeedbackLoading] = useState(false);
   const [hintIndex, setHintIndex] = useState(0);
   const [currentHints, setCurrentHints] = useState<string[]>([]);
 
   const generateChallenge = useCallback(
-    async (category: Category, difficulty: Difficulty, completedCount: number) => {
+    async (
+      category: Category,
+      difficulty: Difficulty,
+      completedCount: number,
+    ) => {
       setIsLoading(true);
       setFeedbackState(emptyFeedback);
       setHintIndex(0);
@@ -53,7 +58,7 @@ export function useChallenge() {
         setIsLoading(false);
       }
     },
-    []
+    [],
   );
 
   const submitAnswer = useCallback(
@@ -71,7 +76,7 @@ export function useChallenge() {
       } else {
         const result = validateCommandInput(
           userContent,
-          challenge.acceptedAnswers ?? [challenge.expectedContent]
+          challenge.acceptedAnswers ?? [challenge.expectedContent],
         );
         isCorrect = result.isCorrect;
       }
@@ -111,7 +116,7 @@ export function useChallenge() {
 
       return isCorrect;
     },
-    [challenge]
+    [challenge],
   );
 
   const showHint = useCallback(() => {

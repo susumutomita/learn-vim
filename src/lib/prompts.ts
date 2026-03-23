@@ -1,18 +1,20 @@
-import type { Category, Difficulty, ChallengeType } from "@/types/challenge";
+import type { Category, ChallengeType, Difficulty } from "@/types/challenge";
 import { categories } from "./categories";
 
 export function buildChallengePrompt(
   category: Category,
   difficulty: Difficulty,
-  completedCount: number
+  completedCount: number,
 ): string {
   const meta = categories.find((c) => c.id === category);
   if (!meta) throw new Error(`Unknown category: ${category}`);
 
   const difficultyGuide = {
     beginner: "基本的な単一コマンドの使い方。3-5行の短いテキスト。",
-    intermediate: "複数コマンドの組み合わせ。5-10行のテキスト。実践的なコード例を使う。",
-    advanced: "複雑な操作の連鎖、効率的なテクニック。10-20行のリアルなコード。最少キーストロークを意識。",
+    intermediate:
+      "複数コマンドの組み合わせ。5-10行のテキスト。実践的なコード例を使う。",
+    advanced:
+      "複雑な操作の連鎖、効率的なテクニック。10-20行のリアルなコード。最少キーストロークを意識。",
   };
 
   if (meta.type === "editor") {
@@ -48,9 +50,15 @@ export function buildChallengePrompt(
 }
 
 function buildCommandInputPrompt(
-  meta: { id: Category; nameJa: string; name: string; commands: string[]; type: ChallengeType },
+  meta: {
+    id: Category;
+    nameJa: string;
+    name: string;
+    commands: string[];
+    type: ChallengeType;
+  },
   difficulty: Difficulty,
-  completedCount: number
+  completedCount: number,
 ): string {
   return `あなたはVim/Neovim/開発ツール学習アプリの問題生成AIです。
 カテゴリ「${meta.nameJa}」(${meta.name}) の ${difficulty} レベルの問題を1つ生成してください。
@@ -86,7 +94,7 @@ export function buildFeedbackPrompt(
   category: Category,
   userContent: string,
   expectedContent: string,
-  isCorrect: boolean
+  isCorrect: boolean,
 ): string {
   return `あなたはVim/Neovim学習アプリのフィードバックAIです。
 

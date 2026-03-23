@@ -1,4 +1,4 @@
-import { execFile } from "child_process";
+import { execFile } from "node:child_process";
 
 export function askClaude(prompt: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ export function askClaude(prompt: string): Promise<string> {
         } catch {
           resolve(stdout.trim());
         }
-      }
+      },
     );
   });
 }
@@ -25,7 +25,10 @@ export function askClaude(prompt: string): Promise<string> {
 export function askClaudeJSON<T>(prompt: string): Promise<T> {
   const jsonPrompt = `${prompt}\n\nIMPORTANT: Respond with ONLY valid JSON, no markdown code blocks, no explanation. Just the raw JSON object.`;
   return askClaude(jsonPrompt).then((result) => {
-    const cleaned = result.replace(/^```json?\n?/, "").replace(/\n?```$/, "").trim();
+    const cleaned = result
+      .replace(/^```json?\n?/, "")
+      .replace(/\n?```$/, "")
+      .trim();
     return JSON.parse(cleaned) as T;
   });
 }

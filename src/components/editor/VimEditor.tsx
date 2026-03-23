@@ -1,21 +1,20 @@
 "use client";
 
+import { defaultKeymap, history } from "@codemirror/commands";
+import { EditorState } from "@codemirror/state";
+import { EditorView, keymap, lineNumbers } from "@codemirror/view";
+import { Vim, getCM, vim } from "@replit/codemirror-vim";
 import {
-  useRef,
-  useEffect,
-  useState,
-  useImperativeHandle,
   forwardRef,
   useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
 } from "react";
-import { EditorView, keymap, lineNumbers } from "@codemirror/view";
-import { EditorState } from "@codemirror/state";
-import { defaultKeymap, history } from "@codemirror/commands";
-import { vim, Vim, getCM } from "@replit/codemirror-vim";
 import { terminalTheme } from "./EditorTheme";
 import VimStatusBar from "./VimStatusBar";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type VimModeChangeHandler = (e: { mode: string }) => void;
 
 export interface VimEditorHandle {
@@ -41,8 +40,7 @@ const VimEditor = forwardRef<VimEditorHandle, VimEditorProps>(
     const initialContentRef = useRef(initialContent);
 
     useImperativeHandle(ref, () => ({
-      getContent: () =>
-        viewRef.current?.state.doc.toString() ?? "",
+      getContent: () => viewRef.current?.state.doc.toString() ?? "",
       setContent: (text: string) => {
         if (viewRef.current) {
           viewRef.current.dispatch({
@@ -118,7 +116,10 @@ const VimEditor = forwardRef<VimEditorHandle, VimEditorProps>(
       };
       const cm = getCM(view);
       if (cm) {
-        cm.on("vim-mode-change", onModeChange as unknown as Function);
+        cm.on(
+          "vim-mode-change",
+          onModeChange as unknown as (...args: unknown[]) => void,
+        );
       }
 
       // Focus editor
@@ -126,7 +127,10 @@ const VimEditor = forwardRef<VimEditorHandle, VimEditorProps>(
 
       return () => {
         if (cm) {
-          cm.off("vim-mode-change", onModeChange as unknown as Function);
+          cm.off(
+            "vim-mode-change",
+            onModeChange as unknown as (...args: unknown[]) => void,
+          );
         }
         view.destroy();
         viewRef.current = null;
@@ -164,7 +168,7 @@ const VimEditor = forwardRef<VimEditorHandle, VimEditorProps>(
         <VimStatusBar mode={mode} cursorPos={cursorPos} />
       </div>
     );
-  }
+  },
 );
 
 export default VimEditor;

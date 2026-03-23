@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import type { Category, Difficulty } from "@/types/challenge";
 import type { UserProgress } from "@/types/progress";
 import { defaultProgress } from "@/types/progress";
-import type { Category, Difficulty } from "@/types/challenge";
+import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "learn-vim-progress";
 
@@ -60,7 +60,7 @@ export function useProgress() {
         };
       });
     },
-    []
+    [],
   );
 
   const markAttempted = useCallback((category: Category) => {
@@ -87,7 +87,7 @@ export function useProgress() {
     (category: Category): number => {
       return progress.categories[category]?.completedCount ?? 0;
     },
-    [progress]
+    [progress],
   );
 
   const getCurrentDifficulty = useCallback(
@@ -97,7 +97,7 @@ export function useProgress() {
       if (count >= 5) return "intermediate";
       return "beginner";
     },
-    [progress]
+    [progress],
   );
 
   return {

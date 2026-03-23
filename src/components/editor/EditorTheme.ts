@@ -57,5 +57,5 @@ export const terminalTheme = EditorView.theme(
       background: "transparent",
     },
   },
-  { dark: true }
+  { dark: true },
 );
