@@ -1,0 +1,198 @@
+import type { Category, ChallengeType } from "@/types/challenge";
+
+export interface CategoryMeta {
+  id: Category;
+  name: string;
+  nameJa: string;
+  description: string;
+  icon: string;
+  type: ChallengeType;
+  commands: string[];
+  area: "neovim-core" | "neovim-plugins" | "ghostty" | "claude-code" | "workflow";
+}
+
+export const categories: CategoryMeta[] = [
+  // Neovim Core
+  {
+    id: "movement",
+    name: "Movement",
+    nameJa: "高速移動",
+    description: "f/t/F/T, {}, %, gd, 0/^/$, w/b/e, gg/G",
+    icon: ">>",
+    type: "editor",
+    commands: ["f", "t", "F", "T", ";", ",", "{", "}", "%", "gd", "w", "b", "e", "gg", "G", "0", "^", "$"],
+    area: "neovim-core",
+  },
+  {
+    id: "editing",
+    name: "Editing",
+    nameJa: "編集の極意",
+    description: "dd, cc, yy, p, P, J, ~, ., u, Ctrl-r",
+    icon: "~=",
+    type: "editor",
+    commands: ["dd", "cc", "yy", "p", "P", "J", "~", ".", "u", "Ctrl-r", "x", "r", "s"],
+    area: "neovim-core",
+  },
+  {
+    id: "text-objects",
+    name: "Text Objects",
+    nameJa: "テキストオブジェクト",
+    description: 'ci", da(, vi{, yap, diw, cas',
+    icon: '""',
+    type: "editor",
+    commands: ["ci\"", "ca\"", "di\"", "da(", "ci(", "vi{", "va{", "yap", "dap", "yiw", "diw", "ciw", "cas", "dis"],
+    area: "neovim-core",
+  },
+  {
+    id: "registers",
+    name: "Registers",
+    nameJa: "レジスタ活用",
+    description: '"ayy, "ap, "+y, "0p, :reg',
+    icon: '"a',
+    type: "editor",
+    commands: ["\"ayy", "\"ap", "\"+y", "\"+p", "\"0p", ":reg"],
+    area: "neovim-core",
+  },
+  {
+    id: "macros",
+    name: "Macros",
+    nameJa: "マクロ実践",
+    description: "qq...q, @q, @@, 100@q, 再帰マクロ",
+    icon: "@q",
+    type: "editor",
+    commands: ["qq", "q", "@q", "@@", "100@q"],
+    area: "neovim-core",
+  },
+  {
+    id: "search-replace",
+    name: "Search & Replace",
+    nameJa: "検索・置換",
+    description: "/, ?, n, N, *, #, cgn, :%s, :g",
+    icon: ":%",
+    type: "editor",
+    commands: ["/", "?", "n", "N", "*", "#", "cgn", ":%s///g", ":g//d", ":g//norm"],
+    area: "neovim-core",
+  },
+  {
+    id: "visual-mode",
+    name: "Visual Mode",
+    nameJa: "ビジュアルモード",
+    description: "v, V, Ctrl-v, gv, o, >, <, =",
+    icon: "V>",
+    type: "editor",
+    commands: ["v", "V", "Ctrl-v", "gv", "o", ">", "<", "=", "I", "A"],
+    area: "neovim-core",
+  },
+  {
+    id: "marks",
+    name: "Marks",
+    nameJa: "マーク",
+    description: "ma, 'a, `a, mA (global), :marks",
+    icon: "'a",
+    type: "editor",
+    commands: ["ma", "'a", "`a", "mA", "'A", ":marks"],
+    area: "neovim-core",
+  },
+  {
+    id: "windows-buffers",
+    name: "Windows & Buffers",
+    nameJa: "ウィンドウとバッファ",
+    description: "Ctrl-w s/v/h/j/k/l, :bn, :bp, :bd",
+    icon: "^W",
+    type: "command-input",
+    commands: ["Ctrl-w s", "Ctrl-w v", "Ctrl-w h", "Ctrl-w j", "Ctrl-w k", "Ctrl-w l", ":bn", ":bp", ":bd", ":ls"],
+    area: "neovim-core",
+  },
+  {
+    id: "ex-commands",
+    name: "Ex Commands",
+    nameJa: "Exコマンド",
+    description: ":norm, :g, :s, :!, :read, :sort",
+    icon: ":!",
+    type: "editor",
+    commands: [":norm", ":g", ":s", ":!", ":read", ":sort", ":w", ":wq", ":q!"],
+    area: "neovim-core",
+  },
+  // Neovim Plugins
+  {
+    id: "telescope",
+    name: "Telescope",
+    nameJa: "Telescope ファジーファインダー",
+    description: "<leader>ff, <leader>fg, <leader>fb, <leader>fh",
+    icon: "ff",
+    type: "command-input",
+    commands: ["<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fs"],
+    area: "neovim-plugins",
+  },
+  {
+    id: "neo-tree",
+    name: "Neo-tree",
+    nameJa: "ファイルツリー",
+    description: "a (新規), d (削除), r (リネーム), ファイル操作全般",
+    icon: "FT",
+    type: "command-input",
+    commands: ["a", "d", "r", "c", "m", "y", "p", "R", "<CR>", "H"],
+    area: "neovim-plugins",
+  },
+  {
+    id: "lsp",
+    name: "LSP",
+    nameJa: "Language Server Protocol",
+    description: "gd, gr, K, <leader>ca, <leader>rn, [d, ]d",
+    icon: "gd",
+    type: "command-input",
+    commands: ["gd", "gr", "K", "<leader>ca", "<leader>rn", "[d", "]d", "gi", "gD"],
+    area: "neovim-plugins",
+  },
+  {
+    id: "nvim-plugins",
+    name: "Plugin Ecosystem",
+    nameJa: "プラグインエコシステム",
+    description: "harpoon, oil.nvim, gitsigns, which-key, nvim-cmp",
+    icon: "{}",
+    type: "command-input",
+    commands: ["<leader>a", "<leader>1", "<leader>2", "-", "]c", "[c", "<leader>hs", "<C-n>", "<C-p>"],
+    area: "neovim-plugins",
+  },
+  // Ghostty
+  {
+    id: "ghostty",
+    name: "Ghostty",
+    nameJa: "Ghosttyターミナル",
+    description: "分割、タブ、パネル移動、設定カスタマイズ",
+    icon: "GT",
+    type: "command-input",
+    commands: ["Cmd+D", "Cmd+Shift+D", "Cmd+T", "Cmd+Shift+[", "Cmd+Shift+]"],
+    area: "ghostty",
+  },
+  // Claude Code
+  {
+    id: "claude-code",
+    name: "Claude Code",
+    nameJa: "Claude Code",
+    description: "/help, /commit, plan mode, worktree, MCP連携",
+    icon: "CC",
+    type: "command-input",
+    commands: ["/help", "/clear", "/compact", "/commit", "/review-pr", "Escape", "Tab"],
+    area: "claude-code",
+  },
+  // Workflow
+  {
+    id: "workflow",
+    name: "Integrated Workflow",
+    nameJa: "統合ワークフロー",
+    description: "全ツールを組み合わせた実践シナリオ",
+    icon: "WF",
+    type: "sequence",
+    commands: [],
+    area: "workflow",
+  },
+];
+
+export const areas = [
+  { id: "neovim-core" as const, name: "Neovim Core", nameJa: "Neovim 実践テクニック" },
+  { id: "neovim-plugins" as const, name: "Neovim Plugins", nameJa: "Neovim プラグイン" },
+  { id: "ghostty" as const, name: "Ghostty", nameJa: "Ghostty ターミナル" },
+  { id: "claude-code" as const, name: "Claude Code", nameJa: "Claude Code" },
+  { id: "workflow" as const, name: "Workflow", nameJa: "統合ワークフロー" },
+];

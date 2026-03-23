@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "learn-vim-dev",
+      "runtimeExecutable": "/Users/susumu/.local/share/mise/installs/node/20.20.1/bin/node",
+      "runtimeArgs": ["node_modules/.bin/next", "dev", "--port", "3939"],
+      "port": 3939
+    }
+  ]
+}
