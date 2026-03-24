@@ -2,6 +2,7 @@
 
 import CategoryCard from "@/components/home/CategoryCard";
 import Header from "@/components/layout/Header";
+import TutorialOverlay from "@/components/tutorial/TutorialOverlay";
 import { useProgress } from "@/hooks/useProgress";
 import { areas, categories } from "@/lib/categories";
 import { useRouter } from "next/navigation";
@@ -26,6 +27,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
+      <TutorialOverlay />
       <Header progress={progress} />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
