@@ -230,6 +230,8 @@ function ChallengeContent() {
             encouragement={feedbackState.encouragement}
             diff={feedbackState.diff}
             isLoading={isFeedbackLoading}
+            expectedAnswer={challenge?.expectedContent}
+            acceptedAnswers={challenge?.acceptedAnswers}
           />
         </div>
       </div>

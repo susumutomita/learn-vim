@@ -78,13 +78,18 @@ const VimEditor = forwardRef<VimEditorHandle, VimEditorProps>(
     useEffect(() => {
       if (!containerRef.current) return;
 
-      // Register custom ex commands
+      // Register custom ex commands - :w and :wq trigger submit
       if (onSubmit) {
         Vim.defineEx("submit", "sub", () => onSubmit());
+        Vim.defineEx("write", "w", () => onSubmit());
+        Vim.defineEx("wq", "wq", () => onSubmit());
+        Vim.defineEx("x", "x", () => onSubmit());
       }
       if (onHint) {
         Vim.defineEx("hint", "hin", () => onHint());
       }
+      // :q and :q! do nothing (prevent error)
+      Vim.defineEx("quit", "q", () => {});
 
       const state = EditorState.create({
         doc: initialContent,
