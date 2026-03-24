@@ -153,6 +153,16 @@ function ChallengeContent() {
                 )}
               </div>
 
+              {/* Instruction banner */}
+              <div className="mx-4 mb-2 px-3 py-2 bg-[#1c2128] border border-[#30363d] rounded text-xs text-[#8b949e]">
+                💡 コマンドを
+                <strong className="text-[#e6edf3]">テキストとして</strong>
+                下の入力欄に入力してください（例:{" "}
+                <code className="text-[#bc8cff]">Cmd+D</code>,{" "}
+                <code className="text-[#bc8cff]">dd</code>,{" "}
+                <code className="text-[#bc8cff]">:w</code>）→ Enter で送信
+              </div>
+
               {/* Command input */}
               <div className="border-t border-[#30363d] p-4">
                 <div className="flex items-center gap-2">
@@ -165,8 +175,10 @@ function ChallengeContent() {
                     onKeyDown={(e) => {
                       if (e.key === "Enter") handleSubmit();
                     }}
-                    placeholder="コマンドを入力..."
+                    placeholder="答えのコマンドを入力して Enter..."
                     className="flex-1 bg-transparent text-[#e6edf3] font-mono text-sm outline-none placeholder-[#484f58]"
+                    // biome-ignore lint/a11y/noAutofocus: UX improvement for command input
+                    autoFocus
                   />
                 </div>
               </div>
@@ -230,6 +242,8 @@ function ChallengeContent() {
             encouragement={feedbackState.encouragement}
             diff={feedbackState.diff}
             isLoading={isFeedbackLoading}
+            expectedAnswer={challenge?.expectedContent}
+            acceptedAnswers={challenge?.acceptedAnswers}
           />
         </div>
       </div>
