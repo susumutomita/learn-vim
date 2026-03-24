@@ -68,7 +68,11 @@ export default function FeedbackPanel({
 
       {isCorrect && (
         <p className="text-sm text-[#8b949e]">
-          `:w` または <kbd className="text-xs px-1.5 py-0.5 bg-[#1c2128] border border-[#30363d] rounded">Skip &gt;&gt;</kbd> で次の問題へ
+          `:w` または{" "}
+          <kbd className="text-xs px-1.5 py-0.5 bg-[#1c2128] border border-[#30363d] rounded">
+            Skip &gt;&gt;
+          </kbd>{" "}
+          で次の問題へ
         </p>
       )}
 

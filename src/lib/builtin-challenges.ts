@@ -88,10 +88,7 @@ export const builtinChallenges: Challenge[] = [
     initialContent:
       "function hello() {\n  console.log('hello');\n}\n\nfunction world() {\n  console.log('world');\n}",
     expectedContent: "}",
-    hints: [
-      "`}` で次の空行の後に移動します",
-      "`{` で前の空行の前に移動します",
-    ],
+    hints: ["`}` で次の空行の後に移動します", "`{` で前の空行の前に移動します"],
     acceptedAnswers: ["}"],
     suggestedCommands: ["{", "}"],
   },
@@ -191,7 +188,8 @@ export const builtinChallenges: Challenge[] = [
     category: "editing",
     difficulty: "intermediate",
     type: "command-input",
-    initialContent: "foo bar foo baz foo → (ciwで置換した後に) 同じ操作を繰り返す",
+    initialContent:
+      "foo bar foo baz foo → (ciwで置換した後に) 同じ操作を繰り返す",
     expectedContent: ".",
     hints: [
       "`.` は直前のノーマルモードの変更を繰り返します",
@@ -224,7 +222,7 @@ export const builtinChallenges: Challenge[] = [
     id: "text-objects-b-2",
     title: "単語を削除: diw",
     description:
-      "カーソル位置の単語を削除するコマンドを入力してください。\n\n💡 `diw` は \"delete inner word\" です。`daw` だと周囲の空白も含めて削除します。",
+      'カーソル位置の単語を削除するコマンドを入力してください。\n\n💡 `diw` は "delete inner word" です。`daw` だと周囲の空白も含めて削除します。',
     category: "text-objects",
     difficulty: "beginner",
     type: "command-input",
@@ -260,7 +258,7 @@ export const builtinChallenges: Challenge[] = [
     id: "text-objects-i-2",
     title: "段落を選択: vap",
     description:
-      "段落全体をビジュアルモードで選択するコマンドを入力してください。\n\n💡 `ap` は \"a paragraph\" です。段落は空行で区切られたテキストブロックです。`ip` だと前後の空行を含みません。",
+      '段落全体をビジュアルモードで選択するコマンドを入力してください。\n\n💡 `ap` は "a paragraph" です。段落は空行で区切られたテキストブロックです。`ip` だと前後の空行を含みません。',
     category: "text-objects",
     difficulty: "intermediate",
     type: "command-input",
@@ -394,7 +392,7 @@ export const builtinChallenges: Challenge[] = [
     id: "registers-b-1",
     title: '名前付きレジスタにコピー: "ayy',
     description:
-      "現在の行をレジスタ `a` にコピーするコマンドを入力してください。\n\n💡 `\"ayy` で「レジスタaに現在行をヤンク」します。`\"ap` でレジスタaの内容を貼り付けます。レジスタは a-z の26個使えます。",
+      '現在の行をレジスタ `a` にコピーするコマンドを入力してください。\n\n💡 `"ayy` で「レジスタaに現在行をヤンク」します。`"ap` でレジスタaの内容を貼り付けます。レジスタは a-z の26個使えます。',
     category: "registers",
     difficulty: "beginner",
     type: "command-input",
@@ -402,7 +400,7 @@ export const builtinChallenges: Challenge[] = [
     expectedContent: '"ayy',
     hints: [
       '`"a` でレジスタaを指定、`yy` で行をヤンク',
-      "大文字 `\"Ayy` だとレジスタaに追記します",
+      '大文字 `"Ayy` だとレジスタaに追記します',
       "`:reg` で全レジスタの中身を確認できます",
     ],
     acceptedAnswers: ['"ayy'],
@@ -412,16 +410,17 @@ export const builtinChallenges: Challenge[] = [
     id: "registers-i-1",
     title: 'システムクリップボードにコピー: "+y',
     description:
-      "選択範囲をシステムクリップボードにコピーするコマンドを入力してください。\n\n💡 `\"+` はシステムクリップボードレジスタです。`\"+y` でコピー、`\"+p` で貼り付け。他のアプリとの間でコピペできます。",
+      '選択範囲をシステムクリップボードにコピーするコマンドを入力してください。\n\n💡 `"+` はシステムクリップボードレジスタです。`"+y` でコピー、`"+p` で貼り付け。他のアプリとの間でコピペできます。',
     category: "registers",
     difficulty: "intermediate",
     type: "command-input",
-    initialContent: "ビジュアルモードで選択済みの状態で → クリップボードにコピー",
+    initialContent:
+      "ビジュアルモードで選択済みの状態で → クリップボードにコピー",
     expectedContent: '"+y',
     hints: [
       '`"+y` でシステムクリップボードにヤンクします',
       '`"+p` でシステムクリップボードから貼り付けます',
-      "`\"*` も同様にクリップボードを指します（OS依存）",
+      '`"*` も同様にクリップボードを指します（OS依存）',
     ],
     acceptedAnswers: ['"+y'],
     suggestedCommands: ['"+y', '"+p', '"*y'],
@@ -630,7 +629,8 @@ export const builtinChallenges: Challenge[] = [
     category: "lsp",
     difficulty: "intermediate",
     type: "command-input",
-    initialContent: "const result: string = getValue();\n// getValue の型情報を見たい",
+    initialContent:
+      "const result: string = getValue();\n// getValue の型情報を見たい",
     expectedContent: "K",
     hints: [
       "`K` でカーソル下のシンボルのドキュメントを表示します",
