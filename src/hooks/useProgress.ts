@@ -100,6 +100,19 @@ export function useProgress() {
     [progress],
   );
 
+  const getWeakAreas = useCallback((): string[] => {
+    const weak: string[] = [];
+    for (const [cat, data] of Object.entries(progress.categories)) {
+      if (data.totalAttempted > 0) {
+        const successRate = data.completedCount / data.totalAttempted;
+        if (successRate < 0.5) {
+          weak.push(cat);
+        }
+      }
+    }
+    return weak;
+  }, [progress]);
+
   return {
     progress,
     loaded,
@@ -107,5 +120,6 @@ export function useProgress() {
     markAttempted,
     getCompletedCount,
     getCurrentDifficulty,
+    getWeakAreas,
   };
 }

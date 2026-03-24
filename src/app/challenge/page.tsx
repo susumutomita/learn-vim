@@ -4,6 +4,7 @@ import ChallengeControls from "@/components/challenge/ChallengeControls";
 import ChallengePanel from "@/components/challenge/ChallengePanel";
 import ExpectedResult from "@/components/challenge/ExpectedResult";
 import FeedbackPanel from "@/components/challenge/FeedbackPanel";
+import AIChatPanel from "@/components/chat/AIChatPanel";
 import type { VimEditorHandle } from "@/components/editor/VimEditor";
 import Header from "@/components/layout/Header";
 import { useChallenge } from "@/hooks/useChallenge";
@@ -30,6 +31,7 @@ function ChallengeContent() {
   const editorRef = useRef<VimEditorHandle>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [commandInput, setCommandInput] = useState("");
+  const [sidebarTab, setSidebarTab] = useState<"info" | "chat">("info");
 
   const {
     challenge,
@@ -50,6 +52,7 @@ function ChallengeContent() {
     markAttempted,
     getCompletedCount,
     getCurrentDifficulty,
+    getWeakAreas,
   } = useProgress();
 
   const hasFetchedRef = useRef(false);
@@ -107,6 +110,7 @@ function ChallengeContent() {
     return (
       <div className="min-h-screen flex items-center justify-center text-[#8b949e]">
         <button
+          type="button"
           onClick={() => router.push("/")}
           className="hover:text-white transition-colors"
         >
@@ -117,6 +121,7 @@ function ChallengeContent() {
   }
 
   const isEditorType = challenge?.type === "editor";
+  const weakAreas = getWeakAreas ? getWeakAreas() : [];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -190,7 +195,7 @@ function ChallengeContent() {
             <div className="mx-4 mt-2 space-y-1">
               {currentHints.map((hint, i) => (
                 <div
-                  key={i}
+                  key={`hint-${i}`}
                   className="text-xs text-[#d29922] bg-[#1c2128] px-3 py-1.5 rounded border border-[#30363d]"
                 >
                   Hint {i + 1}: {hint}
@@ -210,41 +215,82 @@ function ChallengeContent() {
           />
         </div>
 
-        {/* Sidebar */}
-        <div className="lg:w-96 border-t lg:border-t-0 lg:border-l border-[#30363d] flex flex-col overflow-auto bg-[#161b22]">
-          <div className="flex items-center justify-between px-4 pt-4">
+        {/* Sidebar with tabs: Info / Chat */}
+        <div className="lg:w-[420px] border-t lg:border-t-0 lg:border-l border-[#30363d] flex flex-col overflow-hidden bg-[#161b22]">
+          {/* Tab switcher */}
+          <div className="flex border-b border-[#30363d]">
             <button
-              onClick={() => router.push("/")}
-              className="text-xs text-[#8b949e] hover:text-white transition-colors"
+              type="button"
+              onClick={() => setSidebarTab("info")}
+              className={`flex-1 px-4 py-2.5 text-xs font-medium transition-colors ${
+                sidebarTab === "info"
+                  ? "text-[#e6edf3] border-b-2 border-[#3fb950] bg-[#0d1117]"
+                  : "text-[#484f58] hover:text-[#8b949e]"
+              }`}
             >
-              &lt; Back
+              📋 問題
             </button>
-            {feedbackState.isCorrect && (
-              <button
-                onClick={handleSkip}
-                className="text-xs text-[#3fb950] hover:text-[#56d364] font-bold transition-colors"
-              >
-                Next &gt;&gt;
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => setSidebarTab("chat")}
+              className={`flex-1 px-4 py-2.5 text-xs font-medium transition-colors ${
+                sidebarTab === "chat"
+                  ? "text-[#e6edf3] border-b-2 border-[#58a6ff] bg-[#0d1117]"
+                  : "text-[#484f58] hover:text-[#8b949e]"
+              }`}
+            >
+              🤖 AI チャット
+            </button>
           </div>
 
-          <ChallengePanel challenge={challenge} isLoading={isLoading} />
+          {/* Tab content */}
+          {sidebarTab === "info" ? (
+            <div className="flex-1 overflow-auto">
+              <div className="flex items-center justify-between px-4 pt-4">
+                <button
+                  type="button"
+                  onClick={() => router.push("/")}
+                  className="text-xs text-[#8b949e] hover:text-white transition-colors"
+                >
+                  &lt; Back
+                </button>
+                {feedbackState.isCorrect && (
+                  <button
+                    type="button"
+                    onClick={handleSkip}
+                    className="text-xs text-[#3fb950] hover:text-[#56d364] font-bold transition-colors"
+                  >
+                    Next &gt;&gt;
+                  </button>
+                )}
+              </div>
 
-          {isEditorType && challenge && (
-            <ExpectedResult content={challenge.expectedContent} />
+              <ChallengePanel challenge={challenge} isLoading={isLoading} />
+
+              {isEditorType && challenge && (
+                <ExpectedResult content={challenge.expectedContent} />
+              )}
+
+              <FeedbackPanel
+                isCorrect={feedbackState.isCorrect}
+                feedback={feedbackState.feedback}
+                optimalApproach={feedbackState.optimalApproach}
+                encouragement={feedbackState.encouragement}
+                diff={feedbackState.diff}
+                isLoading={isFeedbackLoading}
+                expectedAnswer={challenge?.expectedContent}
+                acceptedAnswers={challenge?.acceptedAnswers}
+              />
+            </div>
+          ) : (
+            <AIChatPanel
+              challenge={challenge}
+              userAnswer={commandInput || editorRef.current?.getContent()}
+              isCorrect={feedbackState.isCorrect}
+              weakAreas={weakAreas}
+              onRequestNextChallenge={handleSkip}
+            />
           )}
-
-          <FeedbackPanel
-            isCorrect={feedbackState.isCorrect}
-            feedback={feedbackState.feedback}
-            optimalApproach={feedbackState.optimalApproach}
-            encouragement={feedbackState.encouragement}
-            diff={feedbackState.diff}
-            isLoading={isFeedbackLoading}
-            expectedAnswer={challenge?.expectedContent}
-            acceptedAnswers={challenge?.acceptedAnswers}
-          />
         </div>
       </div>
     </div>
